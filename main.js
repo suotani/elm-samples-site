@@ -6052,7 +6052,7 @@ var author$project$Main$view = function (model) {
 												A2(
 													author$project$Main$ChangePage,
 													'form/index.html',
-													elm$core$Maybe$Just('/form/src/Main.elm')))
+													elm$core$Maybe$Just('form/src/Main.elm')))
 											]),
 										_List_fromArray(
 											[

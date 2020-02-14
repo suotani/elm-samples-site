@@ -74,7 +74,7 @@ view model =
         
         , div [class "links"]
             [ ul [] 
-              [ li [ onClick <| ChangePage "form/index.html" (Just "/form/src/Main.elm") ] [text "form"]
+              [ li [ onClick <| ChangePage "form/index.html" (Just "form/src/Main.elm") ] [text "form"]
               , li [ onClick <| ChangePage "form/index.html" Nothing ] [text "form"]
               ]
             ]
