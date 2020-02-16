@@ -23,12 +23,15 @@ type alias User =
     , password : String
     , passwordConfirm : String
     }
+
 type alias Model = User
 
 init : () -> (Model, Cmd Msg)
 init _ =
   (User "" Nothing "" "", Cmd.none)
+
 -- UPDATE
+
 type Msg
   = InputName String
   | InputAge String
@@ -59,14 +62,35 @@ update msg model =
 
 view : Model -> Html Msg
 view model = 
-  div []
-    [ div []
-        [ input [ type_ "text", placeholder "Name", value model.name, onInput InputName ] []
-        , input [ type_ "number", placeholder "Age", value <| String.fromInt <| Maybe.withDefault 0 model.age, onInput InputAge ] []
-        , input [ type_ "password", placeholder "Password", value model.password, onInput InputPassword ] []
-        , input [ type_ "password", placeholder "Password Confirm", value model.passwordConfirm, onInput InputPasswordConfirm ] []
-        , button [ onClick Submit ] [ text "Submit" ]
+  div [class "main"]
+    [ div [class "input-area"]
+        [ div [class "input"]
+            [ inputView "text" "Name" model.name InputName ]
+        , div [class "input"]
+            [ inputView "number" "Age" (String.fromInt <| Maybe.withDefault 0 model.age) InputAge ]
+        , div [class "input"]
+            [ inputView "password" "Password" model.password InputPassword ]
+        , div [class "input"]
+            [ inputView "password" "Password Confirm" model.passwordConfirm InputPasswordConfirm ]
+        , div [class "input"]
+            [ button [ onClick Submit ] [ text "Submit" ] ]
+        ]
+    , div [class "output-area"]
+        [ div [class "output"] [text model.name]
+        , div [class "output"]
+            [ case model.age of
+                Just age ->
+                  text <| String.fromInt age
+                
+                Nothing ->
+                  text ""
+            ]
+        , div [class "output"] [text model.password]
+        , div [class "output"] [text model.passwordConfirm]
+
         ]
     ]
 
-  
+inputView : String -> String -> String -> (String -> Msg) -> Html Msg
+inputView t p v msg =
+  input [ type_ t, placeholder p, value v, onInput msg ] []
