@@ -74,8 +74,8 @@ view model =
         
         , div [class "links"]
             [ ul [] 
-              [ li [ onClick <| ChangePage "form/index.html" (Just "form/src/Main.elm") ] [text "form"]
-              , li [ onClick <| ChangePage "form/index.html" Nothing ] [text "form"]
+              [ viewItem "simple-form/index.html" (Just "simple-form/src/Main.elm") "Simple Form"
+              , viewItem "form/index.html" (Just "form/src/Main.elm") "Form"
               ]
             ]
 
@@ -91,3 +91,7 @@ view model =
             text ""
       ]
     ]
+
+viewItem : String -> Maybe String -> String -> Html Msg
+viewItem page src title =
+  li [ onClick <| ChangePage page src ] [text title]

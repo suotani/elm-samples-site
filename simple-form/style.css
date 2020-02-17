@@ -1,0 +1,11 @@
+.main{
+  display: flex;
+}
+
+.input-area {
+  width: 200px;
+}
+
+.output-area{
+  width: 200px;
+}
