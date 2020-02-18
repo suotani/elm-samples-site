@@ -1,0 +1,11 @@
+.filters ul {
+  display: flex;
+  list-style: none;
+}
+.filters li{
+  background-color: greenyellow;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 7px;
+}

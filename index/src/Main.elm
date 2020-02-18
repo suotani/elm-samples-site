@@ -76,6 +76,7 @@ view model =
             [ ul [] 
               [ viewItem "simple-form/index.html" (Just "simple-form/src/Main.elm") "Simple Form"
               , viewItem "form/index.html" (Just "form/src/Main.elm") "Form"
+              , viewItem "filtering/index.html" (Just "filtering/src/Main.elm") "Filtering"
               ]
             ]
 
