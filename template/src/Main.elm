@@ -1,6 +1,7 @@
 import Browser
 import Html exposing (..)
 import Html.Events exposing (..)
+import Html.Attributes exposing(..)
 
 -- MAIN
 
@@ -8,7 +9,7 @@ main =
   Browser.element
     { init = init
     , update = update
-    , subscriptions = subscriptions
+    , subscriptions = \_ -> Sub.none
     , view = view
     }
 
@@ -22,13 +23,6 @@ init : () -> (Model, Cmd Msg)
 type Msg
 
 update : Msg -> Model -> (Model, Cmd Msg)
-
---SUBSCRIPTIONS
-
-subscriptions : Model -> Sub Msg
-subscriptions model = 
-  Sub.none
-
 
 -- VIEW
 

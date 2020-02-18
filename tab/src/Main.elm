@@ -14,12 +14,7 @@ main =
 
 
 -- MODEL
-type Tabs
-  = Tab1
-  | Tab2
-  | Tab3
-  | Tab4
-type alias Model = Tabs
+type alias Model = {}
 
 init : () -> (Model, Cmd Msg)
 
