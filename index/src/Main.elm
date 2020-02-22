@@ -78,6 +78,7 @@ view model =
               , viewItem "form/index.html" (Just "form/src/Main.elm") "Form"
               , viewItem "filtering/index.html" (Just "filtering/src/Main.elm") "Filtering"
               , viewItem "modal/index.html" (Just "modal/src/Main.elm") "Modal"
+              , viewItem "random/index.html" (Just "random/src/Main.elm") "Random"
               , viewItem "time/index.html" (Just "time/src/Main.elm") "Current Time"
               ]
             ]
