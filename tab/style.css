@@ -1,0 +1,25 @@
+.tab ul{
+  display: flex;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 20px;
+}
+
+.tab ul li{
+  width: 100px;
+  margin-right: 2px;
+  background-color: tomato;
+  cursor: pointer;
+}
+
+.tab ul li.current{
+  background-color: bisque;
+}
+
+.tab-body{
+  background-color: bisque;
+}
+h2{
+  margin-top: 0px;
+}
