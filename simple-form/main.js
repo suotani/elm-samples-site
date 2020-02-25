@@ -4971,7 +4971,7 @@ var author$project$SimpleForm$view = function (model) {
 		elm$html$Html$div,
 		_List_fromArray(
 			[
-				elm$html$Html$Attributes$class('main')
+				elm$html$Html$Attributes$class('main-form')
 			]),
 		_List_fromArray(
 			[

@@ -62,7 +62,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model = 
-  div [class "main"]
+  div [class "main-form"]
     [ div [class "input-area"]
         [ div [class "input"]
             [ inputView "text" "Name" model.name InputName ]

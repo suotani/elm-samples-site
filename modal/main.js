@@ -4900,10 +4900,7 @@ var elm$html$Html$Events$onClick = function (msg) {
 var author$project$Modal$view = function (model) {
 	return A2(
 		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('main')
-			]),
+		_List_Nil,
 		_List_fromArray(
 			[
 				A2(

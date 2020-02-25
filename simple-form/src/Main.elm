@@ -40,7 +40,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model = 
-  div [class "main"]
+  div [class "main-form"]
     [ div [class "input-area"]
         [ div [class "input"]
             [ input [ type_ "text", placeholder "Name", value model, onInput Input ] [] ]

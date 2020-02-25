@@ -44,7 +44,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model = 
-  div [class "main"]
+  div []
     [ button [type_ "button", onClick ModalOpen] [text "modal open"]
     , if model == Open then 
         div [class "modal"]
