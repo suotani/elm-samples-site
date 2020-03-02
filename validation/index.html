@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+  <script src="main.js"></script>
+  <script src="../nav/main.js"></script>
+  <script src="../code/main.js"></script>
+  <title>Main</title>
+</head>
+
+<body>
+  <div class="left">
+    <div id="elm-nav"></div>
+  </div>
+  <div class="right">
+    <div id="elm-node" class="demo"></div>
+    <div id="elm-code"></div>
+  </div>
+  <script type="text/javascript">
+    Elm.Validation.init({
+        node: document.getElementById("elm-node")
+    })
+    Elm.Nav.init({
+        node: document.getElementById("elm-nav")
+    })
+    Elm.Code.init({
+        node: document.getElementById("elm-code"),
+        flags: "./src/Main.elm"
+
+    })
+  </script>
+</body>
+</html>

@@ -4355,11 +4355,10 @@ function _Browser_load(url)
 		}
 	}));
 }
-var author$project$Nav$Page = F3(
-	function (demo, codePath, code) {
-		return {code: code, codePath: codePath, demo: demo};
+var author$project$Validation$Model = F2(
+	function (name, nameErrors) {
+		return {name: name, nameErrors: nameErrors};
 	});
-var elm$core$Maybe$Nothing = {$: 'Nothing'};
 var elm$core$Basics$False = {$: 'False'};
 var elm$core$Basics$True = {$: 'True'};
 var elm$core$Result$isOk = function (result) {
@@ -4623,6 +4622,7 @@ var elm$core$Array$initialize = F2(
 var elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
 };
+var elm$core$Maybe$Nothing = {$: 'Nothing'};
 var elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -4836,189 +4836,110 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
-var author$project$Nav$init = function (_n0) {
+var author$project$Validation$init = function (_n0) {
 	return _Utils_Tuple2(
-		A3(author$project$Nav$Page, 'top.html', elm$core$Maybe$Nothing, elm$core$Maybe$Nothing),
+		A2(author$project$Validation$Model, '', _List_Nil),
 		elm$core$Platform$Cmd$none);
 };
-var author$project$Nav$update = F2(
+var elm$core$String$length = _String_length;
+var author$project$Validation$maxLength = F3(
+	function (n, str, errors) {
+		return (_Utils_cmp(
+			n,
+			elm$core$String$length(str)) < 0) ? A2(
+			elm$core$List$cons,
+			'Too Long max ' + (elm$core$String$fromInt(n) + 'length'),
+			errors) : errors;
+	});
+var author$project$Validation$minLength = F3(
+	function (n, str, errors) {
+		return (_Utils_cmp(
+			n,
+			elm$core$String$length(str)) > 0) ? A2(
+			elm$core$List$cons,
+			'Too Short min ' + (elm$core$String$fromInt(n) + 'length'),
+			errors) : errors;
+	});
+var elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var elm$core$Basics$not = _Basics_not;
+var elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var elm$core$List$all = F2(
+	function (isOkay, list) {
+		return !A2(
+			elm$core$List$any,
+			A2(elm$core$Basics$composeL, elm$core$Basics$not, isOkay),
+			list);
+	});
+var elm$core$String$foldr = _String_foldr;
+var elm$core$String$toList = function (string) {
+	return A3(elm$core$String$foldr, elm$core$List$cons, _List_Nil, string);
+};
+var author$project$Validation$onlyAlphabet = F2(
+	function (str, errors) {
+		return A2(
+			elm$core$List$all,
+			function (s) {
+				return elm$core$Char$isAlpha(s);
+			},
+			elm$core$String$toList(str)) ? errors : A2(elm$core$List$cons, 'Only Alphabet', errors);
+	});
+var author$project$Validation$validName = function (name) {
+	return A2(
+		author$project$Validation$onlyAlphabet,
+		name,
+		A3(
+			author$project$Validation$minLength,
+			3,
+			name,
+			A3(author$project$Validation$maxLength, 7, name, _List_Nil)));
+};
+var author$project$Validation$update = F2(
 	function (msg, model) {
-		return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
+		if (msg.$ === 'InputName') {
+			var name = msg.a;
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{name: name}),
+				elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{
+						nameErrors: author$project$Validation$validName(model.name)
+					}),
+				elm$core$Platform$Cmd$none);
+		}
 	});
-var elm$core$Basics$identity = function (x) {
-	return x;
+var author$project$Validation$InputName = function (a) {
+	return {$: 'InputName', a: a};
 };
-var elm$json$Json$Decode$map = _Json_map1;
-var elm$json$Json$Decode$map2 = _Json_map2;
-var elm$json$Json$Decode$succeed = _Json_succeed;
-var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
-	switch (handler.$) {
-		case 'Normal':
-			return 0;
-		case 'MayStopPropagation':
-			return 1;
-		case 'MayPreventDefault':
-			return 2;
-		default:
-			return 3;
-	}
-};
-var elm$html$Html$a = _VirtualDom_node('a');
-var elm$html$Html$li = _VirtualDom_node('li');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var elm$json$Json$Encode$string = _Json_wrap;
-var elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			elm$json$Json$Encode$string(string));
-	});
-var elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
-var author$project$Nav$viewItem = F3(
-	function (page, src, title) {
-		return A2(
-			elm$html$Html$li,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$a,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$href(page)
-						]),
-					_List_fromArray(
-						[
-							elm$html$Html$text(title)
-						]))
-				]));
-	});
-var elm$html$Html$div = _VirtualDom_node('div');
-var elm$html$Html$p = _VirtualDom_node('p');
-var elm$html$Html$ul = _VirtualDom_node('ul');
-var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
-var author$project$Nav$view = function (model) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('main')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$div,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$class('links-head')
-							]),
-						_List_fromArray(
-							[
-								elm$html$Html$text('Elm Samples'),
-								A2(
-								elm$html$Html$p,
-								_List_Nil,
-								_List_fromArray(
-									[
-										elm$html$Html$text('elm 0.19')
-									]))
-							])),
-						A2(
-						elm$html$Html$div,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$class('links')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								elm$html$Html$ul,
-								_List_Nil,
-								_List_fromArray(
-									[
-										A3(
-										author$project$Nav$viewItem,
-										'/simple-form/index.html',
-										elm$core$Maybe$Just('simple-form/src/Main.elm'),
-										'Simple Form'),
-										A3(
-										author$project$Nav$viewItem,
-										'/form/index.html',
-										elm$core$Maybe$Just('form/src/Main.elm'),
-										'Form'),
-										A3(
-										author$project$Nav$viewItem,
-										'/validation/index.html',
-										elm$core$Maybe$Just('validation/src/Main.elm'),
-										'Validation Form'),
-										A3(
-										author$project$Nav$viewItem,
-										'/tab/index.html',
-										elm$core$Maybe$Just('tab/src/Main.elm'),
-										'Tab'),
-										A3(
-										author$project$Nav$viewItem,
-										'/filtering/index.html',
-										elm$core$Maybe$Just('filtering/src/Main.elm'),
-										'Filtering'),
-										A3(
-										author$project$Nav$viewItem,
-										'/modal/index.html',
-										elm$core$Maybe$Just('modal/src/Main.elm'),
-										'Modal'),
-										A3(
-										author$project$Nav$viewItem,
-										'/random/index.html',
-										elm$core$Maybe$Just('random/src/Main.elm'),
-										'Random'),
-										A3(
-										author$project$Nav$viewItem,
-										'/time/index.html',
-										elm$core$Maybe$Just('time/src/Main.elm'),
-										'Current Time')
-									]))
-							]))
-					]))
-			]));
-};
-var elm$browser$Browser$External = function (a) {
-	return {$: 'External', a: a};
-};
-var elm$browser$Browser$Internal = function (a) {
-	return {$: 'Internal', a: a};
-};
-var elm$browser$Browser$Dom$NotFound = function (a) {
-	return {$: 'NotFound', a: a};
-};
-var elm$core$Basics$never = function (_n0) {
-	never:
-	while (true) {
-		var nvr = _n0.a;
-		var $temp$_n0 = nvr;
-		_n0 = $temp$_n0;
-		continue never;
-	}
-};
-var elm$core$Task$Perform = function (a) {
-	return {$: 'Perform', a: a};
-};
-var elm$core$Task$succeed = _Scheduler_succeed;
-var elm$core$Task$init = elm$core$Task$succeed(_Utils_Tuple0);
+var author$project$Validation$Submit = {$: 'Submit'};
 var elm$core$List$foldrHelper = F4(
 	function (fn, acc, ctr, ls) {
 		if (!ls.b) {
@@ -5088,6 +5009,221 @@ var elm$core$List$map = F2(
 			_List_Nil,
 			xs);
 	});
+var elm$core$Basics$identity = function (x) {
+	return x;
+};
+var elm$json$Json$Decode$map = _Json_map1;
+var elm$json$Json$Decode$map2 = _Json_map2;
+var elm$json$Json$Decode$succeed = _Json_succeed;
+var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
+	switch (handler.$) {
+		case 'Normal':
+			return 0;
+		case 'MayStopPropagation':
+			return 1;
+		case 'MayPreventDefault':
+			return 2;
+		default:
+			return 3;
+	}
+};
+var elm$html$Html$button = _VirtualDom_node('button');
+var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$h3 = _VirtualDom_node('h3');
+var elm$html$Html$input = _VirtualDom_node('input');
+var elm$html$Html$p = _VirtualDom_node('p');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$json$Json$Encode$string = _Json_wrap;
+var elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$string(string));
+	});
+var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var elm$html$Html$Attributes$type_ = elm$html$Html$Attributes$stringProperty('type');
+var elm$html$Html$Attributes$value = elm$html$Html$Attributes$stringProperty('value');
+var elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		elm$html$Html$Events$on,
+		'click',
+		elm$json$Json$Decode$succeed(msg));
+};
+var elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var elm$json$Json$Decode$field = _Json_decodeField;
+var elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3(elm$core$List$foldr, elm$json$Json$Decode$field, decoder, fields);
+	});
+var elm$json$Json$Decode$string = _Json_decodeString;
+var elm$html$Html$Events$targetValue = A2(
+	elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	elm$json$Json$Decode$string);
+var elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			elm$json$Json$Decode$map,
+			elm$html$Html$Events$alwaysStop,
+			A2(elm$json$Json$Decode$map, tagger, elm$html$Html$Events$targetValue)));
+};
+var author$project$Validation$view = function (model) {
+	return A2(
+		elm$html$Html$div,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('main-form')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('input-area')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('input')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$input,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$type_('text'),
+										elm$html$Html$Attributes$value(model.name),
+										elm$html$Html$Events$onInput(author$project$Validation$InputName)
+									]),
+								_List_Nil),
+								A2(
+								elm$html$Html$div,
+								_List_Nil,
+								A2(
+									elm$core$List$map,
+									function (e) {
+										return A2(
+											elm$html$Html$p,
+											_List_Nil,
+											_List_fromArray(
+												[
+													elm$html$Html$text(e)
+												]));
+									},
+									model.nameErrors))
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('input')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$button,
+								_List_fromArray(
+									[
+										elm$html$Html$Events$onClick(author$project$Validation$Submit)
+									]),
+								_List_fromArray(
+									[
+										elm$html$Html$text('Submit')
+									]))
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$h3,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Rule')
+									])),
+								A2(
+								elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Max langth 7')
+									])),
+								A2(
+								elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Min length 3')
+									])),
+								A2(
+								elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Only alphabet')
+									]))
+							]))
+					]))
+			]));
+};
+var elm$browser$Browser$External = function (a) {
+	return {$: 'External', a: a};
+};
+var elm$browser$Browser$Internal = function (a) {
+	return {$: 'Internal', a: a};
+};
+var elm$browser$Browser$Dom$NotFound = function (a) {
+	return {$: 'NotFound', a: a};
+};
+var elm$core$Basics$never = function (_n0) {
+	never:
+	while (true) {
+		var nvr = _n0.a;
+		var $temp$_n0 = nvr;
+		_n0 = $temp$_n0;
+		continue never;
+	}
+};
+var elm$core$Task$Perform = function (a) {
+	return {$: 'Perform', a: a};
+};
+var elm$core$Task$succeed = _Scheduler_succeed;
+var elm$core$Task$init = elm$core$Task$succeed(_Utils_Tuple0);
 var elm$core$Task$andThen = _Scheduler_andThen;
 var elm$core$Task$map = F2(
 	function (func, taskA) {
@@ -5162,7 +5298,6 @@ var elm$core$Task$perform = F2(
 			elm$core$Task$Perform(
 				A2(elm$core$Task$map, toMessage, task)));
 	});
-var elm$core$String$length = _String_length;
 var elm$core$String$slice = _String_slice;
 var elm$core$String$dropLeft = F2(
 	function (n, string) {
@@ -5294,14 +5429,14 @@ var elm$url$Url$fromString = function (str) {
 var elm$browser$Browser$element = _Browser_element;
 var elm$core$Platform$Sub$batch = _Platform_batch;
 var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
-var author$project$Nav$main = elm$browser$Browser$element(
+var author$project$Validation$main = elm$browser$Browser$element(
 	{
-		init: author$project$Nav$init,
+		init: author$project$Validation$init,
 		subscriptions: function (_n0) {
 			return elm$core$Platform$Sub$none;
 		},
-		update: author$project$Nav$update,
-		view: author$project$Nav$view
+		update: author$project$Validation$update,
+		view: author$project$Validation$view
 	});
-_Platform_export({'Nav':{'init':author$project$Nav$main(
+_Platform_export({'Validation':{'init':author$project$Validation$main(
 	elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));

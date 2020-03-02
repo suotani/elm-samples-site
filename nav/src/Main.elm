@@ -38,7 +38,7 @@ update msg model = (model, Cmd.none)
 view : Model -> Html Msg
 view model = 
   div [ class "main" ]
-    [ div [ class "left" ] 
+    [ div [ class "" ] 
         [ div [class "links-head" ]
             [ text "Elm Samples"
             , p [] [text "elm 0.19"]
@@ -48,6 +48,7 @@ view model =
             [ ul [] 
               [ viewItem "/simple-form/index.html" (Just "simple-form/src/Main.elm") "Simple Form"
               , viewItem "/form/index.html" (Just "form/src/Main.elm") "Form"
+              , viewItem "/validation/index.html" (Just "validation/src/Main.elm") "Validation Form"
               , viewItem "/tab/index.html" (Just "tab/src/Main.elm") "Tab"
               , viewItem "/filtering/index.html" (Just "filtering/src/Main.elm") "Filtering"
               , viewItem "/modal/index.html" (Just "modal/src/Main.elm") "Modal"
