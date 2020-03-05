@@ -38,7 +38,7 @@ update msg model = (model, Cmd.none)
 view : Model -> Html Msg
 view model = 
   div [ class "main" ]
-    [ div [ class "" ] 
+    [ div [ class "nav" ] 
         [ div [class "links-head" ]
             [ text "Elm Samples"
             , p [] [text "elm 0.19"]

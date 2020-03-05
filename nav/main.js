@@ -4917,7 +4917,7 @@ var author$project$Nav$view = function (model) {
 				elm$html$Html$div,
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$class('')
+						elm$html$Html$Attributes$class('nav')
 					]),
 				_List_fromArray(
 					[
