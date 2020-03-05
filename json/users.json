@@ -1,8 +1,5 @@
-{
-  "users":
-    [ {"name": "jon", "age": 27, "height": 173.5}
-    , {"name": "mike", "age": 3, "height": 95.2}
-    , {"name": "ken", "age": 56, "height": 160.5}
-    , {"name": "tohmas", "age": 12, "height": 151.0}
-    ]
-}
+[ {"name": "jon", "age": 27, "height": 173.5}
+, {"name": "mike", "age": 3, "height": 95.2}
+, {"name": "ken", "age": 56, "height": 160.5}
+, {"name": "tohmas", "age": 12, "height": 151.0}
+]
