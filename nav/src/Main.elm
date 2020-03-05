@@ -54,6 +54,7 @@ view model =
               , viewItem "/modal/index.html" (Just "modal/src/Main.elm") "Modal"
               , viewItem "/random/index.html" (Just "random/src/Main.elm") "Random"
               , viewItem "/time/index.html" (Just "time/src/Main.elm") "Current Time"
+              , viewItem "/json/index.html" (Just "json/src/Main.elm") "Json Get"
               ]
             ]
 

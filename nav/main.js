@@ -4990,7 +4990,12 @@ var author$project$Nav$view = function (model) {
 										author$project$Nav$viewItem,
 										'/time/index.html',
 										elm$core$Maybe$Just('time/src/Main.elm'),
-										'Current Time')
+										'Current Time'),
+										A3(
+										author$project$Nav$viewItem,
+										'/json/index.html',
+										elm$core$Maybe$Just('json/src/Main.elm'),
+										'Json Get')
 									]))
 							]))
 					]))
